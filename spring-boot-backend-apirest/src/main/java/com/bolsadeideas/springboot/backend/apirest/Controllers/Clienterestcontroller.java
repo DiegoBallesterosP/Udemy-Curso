@@ -64,11 +64,10 @@ public class Clienterestcontroller {
     // controlador de Creacion
     // ----------------------------------------------------------------------------------------------------
     @PostMapping("/clientes")
-    public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
+    public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result, Cliente cliente2) {
 
         Cliente clienteNew = null;
         Map<String, Object> response = new HashMap<>();
-
         if (result.hasErrors()) {
 
             List<String> errors = result.getFieldErrors().stream()
@@ -80,7 +79,7 @@ public class Clienterestcontroller {
         }
 
         try {
-            clienteNew = clienteservice.save(cliente);
+            cliente2 = clienteservice.save(cliente);
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al realizar el insert en la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -96,12 +95,15 @@ public class Clienterestcontroller {
     // ----------------------------------------------------------------------------------------------------
     @PutMapping("/clientes/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
+
         Cliente clienteActual = clienteservice.findById(id);
 
-        Cliente clienteUpdate = null;
+        Cliente clienteUpdated = null;
+
         Map<String, Object> response = new HashMap<>();
 
         if (result.hasErrors()) {
+
             List<String> errors = result.getFieldErrors().stream()
                     .map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
                     .collect(Collectors.toList());
@@ -115,24 +117,26 @@ public class Clienterestcontroller {
                     .concat(id.toString().concat(" no existe en la base de datos!")));
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }
+
         try {
+
             clienteActual.setApellidos(cliente.getApellidos());
             clienteActual.setNombre(cliente.getNombre());
             clienteActual.setEmail(cliente.getEmail());
             clienteActual.setCreateAt(cliente.getCreateAt());
 
-            clienteUpdate = clienteservice.save(clienteActual);
+            clienteUpdated = clienteservice.save(clienteActual);
+
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al actualizar el cliente en la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-
         }
 
         response.put("mensaje", "El cliente ha sido actualizado con éxito!");
-        response.put("cliente", clienteUpdate);
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+        response.put("cliente", clienteUpdated);
 
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
 
     // controlador de Eliminar
