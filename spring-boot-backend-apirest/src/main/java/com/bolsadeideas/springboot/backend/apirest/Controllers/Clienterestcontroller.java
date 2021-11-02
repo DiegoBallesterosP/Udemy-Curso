@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.backend.apirest.Controllers;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
@@ -172,7 +175,24 @@ public class Clienterestcontroller {
 
         response.put("mensaje", "El cliente ha sido eliminado con éxito!");
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
-
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file)
+
+    {
+
+        if (file.isEmpty()) {
+            return new ResponseEntity<Object>("Seleccionar un archivo", HttpStatus.OK);
+        }
+
+        try {
+            clienteservice.saveFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<Object>("Archivo subido correctamente", HttpStatus.OK);
+
+    }
 }

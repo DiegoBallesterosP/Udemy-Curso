@@ -1,7 +1,12 @@
 package com.bolsadeideas.springboot.backend.apirest.modelservice;
 
+import java.io.IOException;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import com.bolsadeideas.springboot.backend.apirest.models.Cliente;
 import com.bolsadeideas.springboot.backend.apirest.modelsdao.IClientedao;
 
@@ -37,15 +42,25 @@ public class Clienteservicelmpl implements IClienteservice {
 
     @Override
     @Transactional
-    public Cliente save(Cliente cliente) {
-        return clientedao.save(cliente);
+    public void delete(Long id) {
+        clientedao.deleteById(id);
+
     }
 
     @Override
     @Transactional
-    public void delete(Long id) {
-        clientedao.deleteById(id);
+    public Cliente save(Cliente cliente) {
+        return clientedao.save(cliente);
+    }
 
+    public String upload_folder = ".//src//main//resources//files//";
+
+    public void saveFile(MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(upload_folder + file.getOriginalFilename());
+            Files.write(path, bytes);
+        }
     }
 
 }
