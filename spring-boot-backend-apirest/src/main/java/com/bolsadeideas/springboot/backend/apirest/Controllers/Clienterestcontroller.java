@@ -40,6 +40,8 @@ public class Clienterestcontroller {
         return clienteservice.findAll();
     }
 
+    // se adiciona para para la paginacion
+    // ----------------------------------------------------------------------------------------------------
     @GetMapping("/clientes/page/{page}")
     public Page<Cliente> index(@PathVariable Integer page) {
         Pageable pageable = PageRequest.of(page, 3);
