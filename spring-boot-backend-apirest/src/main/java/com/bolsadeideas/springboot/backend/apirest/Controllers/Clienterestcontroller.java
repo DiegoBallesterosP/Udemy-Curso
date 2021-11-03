@@ -193,6 +193,7 @@ public class Clienterestcontroller {
         }
 
         try {
+
             clienteservice.saveFile(file, id);
         } catch (IOException e) {
             e.printStackTrace();
@@ -206,7 +207,8 @@ public class Clienterestcontroller {
                 archivoFotoAnterior.delete();
             }
         }
-
+        String nombreFoto = file.getOriginalFilename();
+        cliente.setFoto(nombreFoto);
         response.put("se ha subido correctamente la imagen", cliente);
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 
