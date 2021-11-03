@@ -21,5 +21,5 @@ public interface IClienteservice {
 
     public void delete(Long id);
 
-    public void saveFile(MultipartFile file) throws IOException;
+    public void saveFile(MultipartFile file, Long id) throws IOException;
 }

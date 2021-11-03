@@ -1,6 +1,9 @@
 package com.bolsadeideas.springboot.backend.apirest.Controllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -177,22 +180,35 @@ public class Clienterestcontroller {
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file)
+    // controlador de CARGA
+    // ----------------------------------------------------------------------------------------------------
 
-    {
+    @PostMapping("/clientes/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id) {
+        Map<String, Object> response = new HashMap<>();
 
+        Cliente cliente = clienteservice.findById(id);
         if (file.isEmpty()) {
             return new ResponseEntity<Object>("Seleccionar un archivo", HttpStatus.OK);
         }
 
         try {
-            clienteservice.saveFile(file);
+            clienteservice.saveFile(file, id);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return new ResponseEntity<Object>("Archivo subido correctamente", HttpStatus.OK);
+        String nombreFotoAnterior = cliente.getFoto();
+        if (nombreFotoAnterior != null && nombreFotoAnterior.length() > 0) {
+            Path rutaFotoAnterior = Paths.get("files").resolve(nombreFotoAnterior).toAbsolutePath();
+            File archivoFotoAnterior = rutaFotoAnterior.toFile();
+            if (archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
+                archivoFotoAnterior.delete();
+            }
+        }
+
+        response.put("se ha subido correctamente la imagen", cliente);
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 
     }
 }
