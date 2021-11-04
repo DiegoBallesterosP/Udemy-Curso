@@ -204,7 +204,7 @@ public class Clienterestcontroller {
     // controlador de CARGA
     // ----------------------------------------------------------------------------------------------------
 
-    @PostMapping("/clientes/upload")
+    @PostMapping("/clientes/upload/{id}")
     public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id) {
         Map<String, Object> response = new HashMap<>();
 

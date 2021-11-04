@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CLIENTES } from './clientes.json';
+
 import { Cliente } from './cliente';
 import { Observable, pipe } from 'rxjs';
 import { of, observable, throwError } from 'rxjs';
@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class ClienteService {
-  private urlEndPoint:string='http://localhost:8081/api/clientes';
-  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
-  constructor(private http: HttpClient, private router: Router) { }
+  public urlEndPoint:string='http://localhost:8081/api/clientes';
+  public httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
+  constructor(public http: HttpClient, public router: Router) { }
 
   getClientes(page: number): Observable<any> {
     return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
@@ -95,11 +95,11 @@ export class ClienteService {
       );
     }
 
-    subirFoto(archivo: File, id): Observable<Cliente>{
+    subirFoto(file: File, id): Observable<Cliente>{
       let formData = new FormData();
-      formData.append("archivo", archivo);
+      formData.append("file", file);
       formData.append("id", id);
-      return this.http.post(`${this.urlEndPoint}/upload/`, formData).pipe(
+      return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
         map((response: any) => response.cliente as Cliente),
         catchError(e =>{
           console.error(e.error.mensaje);

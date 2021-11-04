@@ -37,7 +37,7 @@ subirFoto(){
   .subscribe(cliente => {
     this.cliente = cliente;
     swal('La foto se ha subido completamente!', `la foto se ha subido con exito: ${this.cliente.foto}`, 'success');
-  });
+    });
 }
 
 }
