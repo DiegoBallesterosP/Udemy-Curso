@@ -249,6 +249,7 @@ public class Clienterestcontroller {
     public ResponseEntity<Resource> VerFoto(@PathVariable String nombreFoto) {
 
         Path rutaArchivo = Paths.get("files").resolve(nombreFoto).toAbsolutePath();
+        log.info(rutaArchivo.toString());
         Resource recurso = null;
 
         try {
@@ -258,7 +259,14 @@ public class Clienterestcontroller {
         }
 
         if (!recurso.exists() && !recurso.isReadable()) {
-            throw new RuntimeException("Error no se pudo cargar la imagen: " + nombreFoto);
+            rutaArchivo = Paths.get("spring-boot-backend-apirest/src/main/resources/static/images")
+                    .resolve("not-user.png").toAbsolutePath();
+            try {
+                recurso = new UrlResource(rutaArchivo.toUri());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            log.error("Error no se pudo cargar la imagen: " + nombreFoto);
         }
 
         HttpHeaders cabecera = new HttpHeaders();
