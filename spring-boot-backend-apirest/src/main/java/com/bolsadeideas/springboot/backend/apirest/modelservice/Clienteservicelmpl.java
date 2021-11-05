@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import com.bolsadeideas.springboot.backend.apirest.models.Cliente;
+import com.bolsadeideas.springboot.backend.apirest.models.Region;
 import com.bolsadeideas.springboot.backend.apirest.modelsdao.IClientedao;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,13 @@ public class Clienteservicelmpl implements IClienteservice {
             Path path = Paths.get(upload_folder + file.getOriginalFilename());
             Files.write(path, bytes);
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Region> findAllRegiones() {
+
+        return clientedao.findAllRegiones();
     }
 
 }

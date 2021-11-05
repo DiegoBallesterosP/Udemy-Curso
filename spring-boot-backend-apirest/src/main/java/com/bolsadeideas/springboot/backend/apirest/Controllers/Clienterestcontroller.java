@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import com.bolsadeideas.springboot.backend.apirest.models.Cliente;
+import com.bolsadeideas.springboot.backend.apirest.models.Region;
 import com.bolsadeideas.springboot.backend.apirest.modelservice.IClienteservice;
 import com.bolsadeideas.springboot.backend.apirest.modelservice.IUploadfileservice;
 
@@ -148,6 +149,7 @@ public class Clienterestcontroller {
             clienteActual.setNombre(cliente.getNombre());
             clienteActual.setEmail(cliente.getEmail());
             clienteActual.setCreateAt(cliente.getCreateAt());
+            clienteActual.setRegion(cliente.getRegion());
 
             clienteUpdated = clienteservice.save(clienteActual);
 
@@ -240,5 +242,10 @@ public class Clienterestcontroller {
 
         return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/clientes/regiones")
+    public List<Region> listarRegiones() {
+        return clienteservice.findAllRegiones();
     }
 }

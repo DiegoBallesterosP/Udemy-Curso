@@ -1,24 +1,34 @@
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Manolo', 'Diaz', 'mdiaz@gmail.com', '2021/09/20')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Laura', 'Mejia','lmejia@yahoo.co','2021/08/08')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Adrian', 'Monsalve', ' amonsal@outlook.es', '2021/06/12')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Vanessa', 'Gutierrez', 'vgutie1@outlook.es', '2021/10/26')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Cristian', 'Castellanos', 'ccastel@hotmail.com', '2021/07/20')
-
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Katherine', 'Suarez', 'lmejia@gmail.com', '2020/10/20')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Liz', 'Rodriguez','lluna@yahoo.com','2019/06/09')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Oscar', 'Quiroga', ' OscarQuiroga@outlook.com', '2021/11/02')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Cristina', 'Monsalve', 'cristinaMonsalve1911@outlook.es', '2020/01/12')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Johana', 'Palacios', 'johana111@hotmail.com', '2021/04/04')
+INSERT INTO regiones (id, nombre) VALUES (1, 'Sudamérica');
+INSERT INTO regiones (id, nombre) VALUES (2, 'Centroamérica');
+INSERT INTO regiones (id, nombre) VALUES (3, 'Norteamérica');
+INSERT INTO regiones (id, nombre) VALUES (4, 'Europa');
+INSERT INTO regiones (id, nombre) VALUES (5, 'Asia');
+INSERT INTO regiones (id, nombre) VALUES (6, 'Africa');
+INSERT INTO regiones (id, nombre) VALUES (7, 'Oceanía');
+INSERT INTO regiones (id, nombre) VALUES (8, 'Antártida');
 
 
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Adrian', 'Gimenez', 'AdriGim@Outlook.com', '2019/05/05')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Karim', 'Santos','ksantos@yahoo.com','2015/07/12')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Maria', 'Monsalve', ' Monsalve@hotmail.com', '2012/12/07')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('William', 'Zapata', 'Wilimam@outlook.es', '2018/02/27')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Erik', 'Montaña', 'Erik@hotmail.com', '2021/07/15')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (1, 'Manolo', 'Diaz', 'mdiaz@gmail.com', '2021/09/20')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (1, 'Laura', 'Mejia','lmejia@yahoo.co','2021/08/08')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (2, 'Adrian', 'Monsalve', ' amonsal@outlook.es', '2021/06/12')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (2, 'Vanessa', 'Gutierrez', 'vgutie1@outlook.es', '2021/10/26')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (3, 'Cristian', 'Castellanos', 'ccastel@hotmail.com', '2021/07/20')
 
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Lauren', 'Viña', 'Lauren@yahoo.com', '2019/05/05')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Karla', 'Giraldo','Giraldo@worldoffices.com','2015/07/12')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Mati', 'Aldemar', ' viña@outlook.com', '2012/12/07')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Venito', 'Casas', 'venicasas@outlook.es', '2018/02/27')
-INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES ('Pepe', 'Yusepe', 'pepe@hotmail.com', '2021/07/15')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (3, 'Katherine', 'Suarez', 'lmejia@gmail.com', '2020/10/20')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (4, 'Liz', 'Rodriguez','lluna@yahoo.com','2019/06/09')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (4, 'Oscar', 'Quiroga', ' OscarQuiroga@outlook.com', '2021/11/02')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (5, 'Cristina', 'Monsalve', 'cristinaMonsalve1911@outlook.es', '2020/01/12')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (5, 'Johana', 'Palacios', 'johana111@hotmail.com', '2021/04/04')
+
+
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (6, 'Adrian', 'Gimenez', 'AdriGim@Outlook.com', '2019/05/05')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (6, 'Karim', 'Santos','ksantos@yahoo.com','2015/07/12')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (7, 'Maria', 'Monsalve', ' Monsalve@hotmail.com', '2012/12/07')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (7, 'William', 'Zapata', 'Wilimam@outlook.es', '2018/02/27')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (8, 'Erik', 'Montaña', 'Erik@hotmail.com', '2021/07/15')
+
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (1, 'Lauren', 'Viña', 'Lauren@yahoo.com', '2019/05/05')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (2, 'Karla', 'Giraldo','Giraldo@worldoffices.com','2015/07/12')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (3, 'Mati', 'Aldemar', ' viña@outlook.com', '2012/12/07')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (4, 'Venito', 'Casas', 'venicasas@outlook.es', '2018/02/27')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (5, 'Pepe', 'Yusepe', 'pepe@hotmail.com', '2021/07/15')
