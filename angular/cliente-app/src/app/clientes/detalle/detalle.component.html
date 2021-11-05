@@ -16,14 +16,16 @@
                 <div class="mb-3">
                     <label for="formFile" class="form-label"></label>
                     <input (change)="seleccionarFoto($event)" class="form-control" type="file" id="formFile">
-                </div>
+                </div> 
             </div>
-                    <div class="input-group-append">
-                    <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
-                </div>
-
+            <div class="input-group-append">
+                <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+            </div>
+            
         </div>
-        <div class ="col-sm"></div>
+        <div class="col-sm">
+            <img *ngIf="cliente?.foto" src="http://localhost:8081/api/files/img/{{cliente.foto}}" alt="{{cliente.foto}}" class="img-thumbnail ">
+          </div>
     </div>
 </div>  
     </div>
