@@ -1,3 +1,4 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -15,6 +16,8 @@ export class DetalleComponent implements OnInit {
   cliente: Cliente;
   titulo: string ="Detalle del cliente";
   public fotoSeleccionada: File;
+  progreso:number = 0;
+
   constructor(private clienteService: ClienteService, 
     private activateRoute: ActivatedRoute) { }
 
@@ -28,26 +31,32 @@ export class DetalleComponent implements OnInit {
       }
     });
   }
-  seleccionarFoto(event){
-this.fotoSeleccionada= event.target.files[0];
-console.log(this.fotoSeleccionada);
-if(this.fotoSeleccionada.type.indexOf('image')< 0){
-  swal('Error seleccionar imagen:', 'El archivo debe ser una imagen', 'error');
-  this.fotoSeleccionada=null;
-}
+
+ seleccionarFoto(event) {
+    this.fotoSeleccionada = event.target.files[0];
+    this.progreso = 0;
+    console.log(this.fotoSeleccionada);
+    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+      swal('Error seleccionar imagen: ', 'El archivo debe ser del tipo imagen', 'error');
+      this.fotoSeleccionada = null;
+    }
   }
 
-subirFoto(){
-if(!this.fotoSeleccionada){
-  swal('Error Upload:', 'Debe seleccionar una foto', 'error');
-}else{
+  subirFoto() {
 
-  this.clienteService.subirFoto(this.fotoSeleccionada, this.cliente.id)
-  .subscribe(cliente => {
-    this.cliente = cliente;
-    swal('La foto se ha subido completamente!', `la foto se ha subido con exito: ${this.cliente.foto}`, 'success');
-    });
-}
-}
-
+    if (!this.fotoSeleccionada) {
+      swal('Error Upload: ', 'Debe seleccionar una foto', 'error');
+    } else {
+      this.clienteService.subirFoto(this.fotoSeleccionada, this.cliente.id)
+        .subscribe(event => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progreso = Math.round(100 * event.loaded / event.total);
+          } else if (event.type === HttpEventType.Response) {
+            let response: any = event.body;
+            this.cliente = response.cliente as Cliente;
+            swal('La foto se ha subido completamente!', response.mensaje, 'success');
+          }
+        });
+    }
+  }
 }

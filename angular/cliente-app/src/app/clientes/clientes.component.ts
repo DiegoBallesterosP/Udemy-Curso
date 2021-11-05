@@ -13,66 +13,66 @@ export class ClientesComponent implements OnInit {
 
   clientes: Cliente[];
   paginador: any;
-    constructor(private clienteService: ClienteService, 
-      private activatedRoute: ActivatedRoute) { }
-   
-    ngOnInit() {
-      
+  constructor(private clienteService: ClienteService,
+    private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit() {
+
 
     // adicionando paginacion -------------------------------------
-      this.activatedRoute.paramMap.subscribe( params =>{
-        let page: number = +params.get('page');
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
 
-        if(!page){
-          page=0;
-        }
-        this.clienteService.getClientes(page)
+      if (!page) {
+        page = 0;
+      }
+      this.clienteService.getClientes(page)
         .pipe(
           tap(response => {
             console.log('ClienteService: tap 3');
-            (response.content as Cliente[]).forEach(cliente =>{
-            console.log(cliente.nombre);
+            (response.content as Cliente[]).forEach(cliente => {
+              console.log(cliente.nombre);
             });
           })
-        ).subscribe(response =>{ 
-          
+        ).subscribe(response => {
+
           this.clientes = response.content as Cliente[];
           this.paginador = response;
         });
-          
+
+    }
+    );
+  }
+  // Alerta de eliminacion con swal -------------------------------------
+  delete(cliente: Cliente): void {
+    swal({
+      title: 'Estas seguro?',
+      text: `Desea eliminar el cliente ${cliente.nombre} ${cliente.apellidos}?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.clienteService.delete(cliente.id).subscribe(
+          response => {
+            this.clientes = this.clientes.filter(cli => cli !== cliente)
+            swal(
+              'Cliente Eliminado!',
+              `Cliente ${cliente.nombre} eliminado con exito.`,
+              'success'
+            )
+          }
+        )
+
       }
-      );
-    }
-// Alerta de eliminacion con swal -------------------------------------
-delete(cliente: Cliente): void{
-  swal({
-    title: 'Estas seguro?',
-    text: `Desea eliminar el cliente ${cliente.nombre} ${cliente.apellidos}?`,
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, eliminar!',
-    cancelButtonText: 'No, cancelar!',
-    confirmButtonClass: 'btn btn-success',
-    cancelButtonClass: 'btn btn-danger',
-    buttonsStyling:false,
-    reverseButtons: true
-  }).then((result) => {
-    if (result.value) {
-      this.clienteService.delete(cliente.id).subscribe(
-        response =>{
-          this.clientes = this.clientes.filter(cli => cli !== cliente)
-          swal(
-            'Cliente Eliminado!',
-            `Cliente ${cliente.nombre} eliminado con exito.`,
-            'success'
-          )
-        }
-      )
-     
-    }
-  })
-}
+    })
+  }
 
 }

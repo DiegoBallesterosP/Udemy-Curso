@@ -1,9 +1,9 @@
-export class Cliente{
+export class Cliente {
 
     id: number;
-    nombre:string;
-    apellidos:string;
-    createAt:string;
+    nombre: string;
+    apellidos: string;
+    createAt: string;
     email: string;
     foto: string;
 }
