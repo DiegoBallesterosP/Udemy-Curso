@@ -204,7 +204,7 @@ public class Clienterestcontroller {
     // controlador de CARGA
     // ----------------------------------------------------------------------------------------------------
 
-    @PostMapping("/clientes/upload/{id}")
+    @PostMapping("/clientes/upload")
     public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id) {
         Map<String, Object> response = new HashMap<>();
 
@@ -220,7 +220,7 @@ public class Clienterestcontroller {
 
             } catch (IOException e) {
                 response.put("mensaje", "Error al subir la imagen del cliente" + nombreArchivo);
-                response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
+
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
             }
 

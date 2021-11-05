@@ -54,6 +54,7 @@ public class Clienteservicelmpl implements IClienteservice {
     }
 
     public String upload_folder = ".//src//main//resources//files//";
+    // src//main//resources//files//
 
     public void saveFile(MultipartFile file, Long id) throws IOException {
         if (!file.isEmpty()) {
