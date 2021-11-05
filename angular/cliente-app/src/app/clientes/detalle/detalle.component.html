@@ -17,6 +17,7 @@
                             <label for="formFile" class="form-label"></label>
                             <input (change)="seleccionarFoto($event)" class="form-control" type="file" id="formFile">
                         </div>
+                        
                     </div>
                     <div class="input-group-append">
                         <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary"
