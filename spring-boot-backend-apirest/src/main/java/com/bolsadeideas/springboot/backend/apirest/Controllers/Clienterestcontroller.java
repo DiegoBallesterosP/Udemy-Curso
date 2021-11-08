@@ -25,6 +25,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -64,6 +65,8 @@ public class Clienterestcontroller {
 
     // controlador de consulta
     // ----------------------------------------------------------------------------------------------------
+
+    @Secured({ "ROLE_ADMIN", "ROLE_USER" })
     @GetMapping("/clientes/{id}")
     public ResponseEntity<?> show(@PathVariable Long id) {
 
@@ -88,6 +91,7 @@ public class Clienterestcontroller {
 
     // controlador de Creacion
     // ----------------------------------------------------------------------------------------------------
+    @Secured({ "ROLE_ADMIN" })
     @PostMapping("/clientes")
     public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result, Cliente cliente2) {
 
@@ -118,6 +122,7 @@ public class Clienterestcontroller {
 
     // controlador de Actualiza
     // ----------------------------------------------------------------------------------------------------
+    @Secured({ "ROLE_ADMIN" })
     @PutMapping("/clientes/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
 
@@ -167,6 +172,7 @@ public class Clienterestcontroller {
 
     // controlador de Eliminar
     // ----------------------------------------------------------------------------------------------------
+    @Secured({ "ROLE_ADMIN" })
     @DeleteMapping("/clientes/{id}")
 
     public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -197,6 +203,7 @@ public class Clienterestcontroller {
     // controlador de CARGA
     // ----------------------------------------------------------------------------------------------------
 
+    @Secured({ "ROLE_ADMIN", "ROLE_USER" })
     @PostMapping("/clientes/upload")
     public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id) {
         Map<String, Object> response = new HashMap<>();
@@ -244,6 +251,7 @@ public class Clienterestcontroller {
 
     }
 
+    @Secured({ "ROLE_ADMIN" })
     @GetMapping("/clientes/regiones")
     public List<Region> listarRegiones() {
         return clienteservice.findAllRegiones();

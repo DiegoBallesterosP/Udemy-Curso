@@ -16,6 +16,7 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData} from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetalleComponent } from './clientes/detalle/detalle.component';
+import { LoginComponent } from './usuarios/login.component';
 
 
 
@@ -40,7 +41,8 @@ const routes: Routes =[
     ClientesComponent,
     FormComponent,
     PaginatorComponent,
-    DetalleComponent
+    DetalleComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

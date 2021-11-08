@@ -15,7 +15,7 @@ INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (2,
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (3, 'Cristian', 'Castellanos', 'ccastel@hotmail.com', '2021/07/20')
 
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (3, 'Katherine', 'Suarez', 'lmejia@gmail.com', '2020/10/20')
-INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (4, 'Liz', 'Rodriguez','lluna@yahoo.com','2019/06/09')
+INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (4, 'Liz', 'Laura','lluna@yahoo.com','2019/06/09')
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (4, 'Oscar', 'Quiroga', ' OscarQuiroga@outlook.com', '2021/11/02')
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (5, 'Cristina', 'Monsalve', 'cristinaMonsalve1911@outlook.es', '2020/01/12')
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (5, 'Johana', 'Palacios', 'johana111@hotmail.com', '2021/04/04')
@@ -33,8 +33,8 @@ INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (3,
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (4, 'Venito', 'Casas', 'venicasas@outlook.es', '2018/02/27')
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (5, 'Pepe', 'Yusepe', 'pepe@hotmail.com', '2021/07/15')
 
-INSERT INTO usuarios (username, password, enabled) VALUES ('diego','$2a$10$FcIMRIma6tQ9GNmNRj8XCu.VcGwB8EIogVRde6nebq7XtN3KAVZRO',1);
-INSERT INTO usuarios (username, password, enabled) VALUES ('admin','$2a$10$wiR1OsXY9yXQ9W5top07AugV7ZQp2jzRu0Mhh/tPkowkSmH9kiOtG',1);
+INSERT INTO usuarios (username, password, enabled, nombre, apellidos, email) VALUES ('diego','$2a$10$FcIMRIma6tQ9GNmNRj8XCu.VcGwB8EIogVRde6nebq7XtN3KAVZRO',1, "Manolo", "Diaz", "mdiaz@gmail.com" );
+INSERT INTO usuarios (username, password, enabled, nombre, apellidos, email) VALUES ('admin','$2a$10$wiR1OsXY9yXQ9W5top07AugV7ZQp2jzRu0Mhh/tPkowkSmH9kiOtG',1, "laura", "Mejia", "lmejia@yahoo.co");
 
 INSERT INTO roles (nombre) VALUES ('ROLE_USER');
 INSERT INTO roles (nombre) VALUES ('ROLE_ADMIN');
