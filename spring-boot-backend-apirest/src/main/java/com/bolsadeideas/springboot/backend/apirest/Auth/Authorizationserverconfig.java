@@ -1,5 +1,7 @@
 package com.bolsadeideas.springboot.backend.apirest.Auth;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 @Configuration
@@ -23,6 +26,8 @@ public class Authorizationserverconfig extends AuthorizationServerConfigurerAdap
     @Autowired
     @Qualifier("authenticationManager")
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private Infoadicionaltoken infoAdicionalToken;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -39,13 +44,17 @@ public class Authorizationserverconfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager).accessTokenConverter(accessTokenConverter());
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(infoAdicionalToken));
+        endpoints.authenticationManager(authenticationManager).accessTokenConverter(accessTokenConverter())
+                .tokenEnhancer(tokenEnhancerChain);
     }
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey(Jwtconfig.LLAVE_SECRETA);
+        jwtAccessTokenConverter.setSigningKey(Jwtconfig.RSA_PRIVADA);
+        jwtAccessTokenConverter.setVerifierKey(Jwtconfig.RSA_PUBLICA);
         return jwtAccessTokenConverter;
     }
 

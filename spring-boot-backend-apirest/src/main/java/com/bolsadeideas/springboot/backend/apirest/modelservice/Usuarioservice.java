@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
-public class Usuarioservice implements UserDetailsService {
+public class Usuarioservice implements IUsuarioservice, UserDetailsService {
 
     private Logger logger = LoggerFactory.getLogger(Usuarioservice.class);
 
@@ -41,6 +41,11 @@ public class Usuarioservice implements UserDetailsService {
         return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true,
                 authorities);
 
+    }
+
+    @Override
+    public Usuario findByUsername(String username) {
+        return usuarioDao.findByUsername(username);
     }
 
 }
