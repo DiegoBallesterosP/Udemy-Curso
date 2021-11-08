@@ -32,3 +32,13 @@ INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (2,
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (3, 'Mati', 'Aldemar', ' viña@outlook.com', '2012/12/07')
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (4, 'Venito', 'Casas', 'venicasas@outlook.es', '2018/02/27')
 INSERT INTO clientes (region_id, nombre, apellidos, email, create_at) VALUES (5, 'Pepe', 'Yusepe', 'pepe@hotmail.com', '2021/07/15')
+
+INSERT INTO usuarios (username, password, enabled) VALUES ('diego','$2a$10$FcIMRIma6tQ9GNmNRj8XCu.VcGwB8EIogVRde6nebq7XtN3KAVZRO',1);
+INSERT INTO usuarios (username, password, enabled) VALUES ('admin','$2a$10$wiR1OsXY9yXQ9W5top07AugV7ZQp2jzRu0Mhh/tPkowkSmH9kiOtG',1);
+
+INSERT INTO roles (nombre) VALUES ('ROLE_USER');
+INSERT INTO roles (nombre) VALUES ('ROLE_ADMIN');
+
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 1);
