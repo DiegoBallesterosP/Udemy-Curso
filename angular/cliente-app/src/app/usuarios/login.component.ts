@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  titulo:string ='Por favor Sing In!';
+  titulo:string ='Por favor ingrese!';
   usuario:Usuario;
 
   constructor(private authService: AuthService, private router:Router) {
@@ -18,6 +18,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.authService.isAuthenticated()){
+      swal('Login', `Hola ${this.authService.usuario.username} ya se encuentra autenticado`, 'info');
+      this.router.navigate(['/clientes']);
+    }
+
   }
 
   login():void{
@@ -29,9 +34,18 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.usuario).subscribe(response=>{
       console.log(response);
+      this.authService.guardarUsuario(response.access_token);
+      this.authService.guardarToken(response.access_token);
+
+      let usuario = this.authService.usuario;
       this.router.navigate(['/clientes']);
-      swal('Login', `Bienvenido ${response.username}, has iniciado sesión con éxito!`, 'success');
-    })
+      swal('Login', `Bienvenido ${usuario.username}, has iniciado sesión con éxito!`, 'success');
+    }, err=>{
+      if(err.status == 400){
+        swal('Login', 'Usuario o Clave incorrectas!', 'error');
+      }
+    }
+    );
   
   } 
 }
