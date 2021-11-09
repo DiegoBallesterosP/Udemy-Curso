@@ -19,15 +19,16 @@
         </li>
       
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" routerLink="/clientes">Clientes</a>
+          <a class="nav-link" aria-current="page" [routerLink]="['/clientes']">Clientes</a>
         </li>
       
       </ul>
-      
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Busqueda" aria-label="Search">
-        <button class="btn btn-outline-success " type="submit">Buscar</button>
-      </form>
-    </div>
+
+
+      <ul class="navbar-nav navbar-right">
+        <li><a [routerLink]="['/login']" class="btn btn-outline-primary">Sing In</a></li>
+
+      </ul>
+      </div>
   </div>
 </nav>
