@@ -91,7 +91,7 @@ public class Clienterestcontroller {
 
     // controlador de Creacion
     // ----------------------------------------------------------------------------------------------------
-    @Secured({ "ROLE_ADMIN" })
+    @Secured("ROLE_ADMIN")
     @PostMapping("/clientes")
     public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result, Cliente cliente2) {
 
@@ -122,7 +122,7 @@ public class Clienterestcontroller {
 
     // controlador de Actualiza
     // ----------------------------------------------------------------------------------------------------
-    @Secured({ "ROLE_ADMIN" })
+    @Secured("ROLE_ADMIN")
     @PutMapping("/clientes/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
 
@@ -172,7 +172,7 @@ public class Clienterestcontroller {
 
     // controlador de Eliminar
     // ----------------------------------------------------------------------------------------------------
-    @Secured({ "ROLE_ADMIN" })
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/clientes/{id}")
 
     public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -229,9 +229,7 @@ public class Clienterestcontroller {
             response.put("mensaje", "Has subido correctamente la imangen" + nombreArchivo);
 
         }
-
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-
     }
 
     // ver foto -----------------------------------
@@ -251,7 +249,7 @@ public class Clienterestcontroller {
 
     }
 
-    @Secured({ "ROLE_ADMIN" })
+    @Secured("ROLE_ADMIN, ROLE_USER")
     @GetMapping("/clientes/regiones")
     public List<Region> listarRegiones() {
         return clienteservice.findAllRegiones();

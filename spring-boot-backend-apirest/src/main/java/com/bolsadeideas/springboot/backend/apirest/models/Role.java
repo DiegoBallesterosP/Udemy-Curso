@@ -20,8 +20,6 @@ public class Role implements Serializable {
     @Column(unique = true, length = 20)
     private String nombre;
 
-    private static final long serialVersionUID = 1L;
-
     public Long getId() {
         return id;
     }
@@ -37,5 +35,7 @@ public class Role implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    private static final long serialVersionUID = 1L;
 
 }

@@ -1,34 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <a class="navbar-brand" href="#">World Office</a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-      
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" href="#">INICIO</a>
-        </li>
-      
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" routerLink="/directivas">Directivas</a>
-        </li>
-      
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" [routerLink]="['/clientes']">Clientes</a>
-        </li>
-      
-      </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
 
 
-      <ul class="navbar-nav navbar-right">
-        <li><a [routerLink]="['/login']" class="btn btn-outline-primary">Sing In</a></li>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="margin:5px;">
 
-      </ul>
-      </div>
+    <a class="navbar-brand" >World Office</a>
+
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" aria-current="page" href="#">INICIO</a>
+      </li>
+
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" aria-current="page" routerLink="/directivas">Directivas</a>
+      </li>
+
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" aria-current="page" [routerLink]="['/clientes']">Clientes</a>
+      </li>
+
+    </ul>
+
+    <ul class="navbar-nav navbar-right">
+      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-primary">Sign In</a></li>
+
+
+      <li *ngIf="authService.isAuthenticated()"  class="dropdown">
+        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          {{authService.usuario.username}}
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
+          <button (click)="logout()" class="dropdown-item" type="submit">Sing Out </button>
+        </div>
+      </li>
+
+
+    </ul>
   </div>
 </nav>

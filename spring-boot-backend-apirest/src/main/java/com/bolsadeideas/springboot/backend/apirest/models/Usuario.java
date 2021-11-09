@@ -42,8 +42,6 @@ public class Usuario implements Serializable {
             @UniqueConstraint(columnNames = { "usuario_id", "role_id" }) })
     private List<Role> roles;
 
-    private static final long serialVersionUID = 1L;
-
     public Long getId() {
         return id;
     }
@@ -107,5 +105,7 @@ public class Usuario implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    private static final long serialVersionUID = 1L;
 
 }
