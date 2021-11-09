@@ -42,3 +42,18 @@ INSERT INTO roles (nombre) VALUES ('ROLE_ADMIN');
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 1);
+
+
+INSERT INTO productos (nombre, precio, create_at) VALUES('Motorola One Action', 780000, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Motorola g60s', 1400000, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Samsung Galaxy a31', 999000, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Iphone X', 2500000, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Xiaomi Mi A11', 1780000, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Samsung s21', 3000000, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Xiaomi Redmi Note 8', 600000, NOW());
+
+INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Facturas Celulares', null, 1, NOW());
+
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 1);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(2, 1, 2);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 4);
