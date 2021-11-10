@@ -82,7 +82,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <input type="submit" (click)="create()" value="Crear Factura" class="btn btn-secondary" [disabled]="facturaForm.form.invalid || factura.items.length==0">
+                    <input type="submit" (click)="create(facturaForm)" value="Crear Factura" class="btn btn-secondary" [disabled]="facturaForm.form.invalid || factura.items.length==0">
                 </div>
             </div>
 
