@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bolsadeideas.springboot.backend.apirest.models.Cliente;
+import com.bolsadeideas.springboot.backend.apirest.models.Factura;
 import com.bolsadeideas.springboot.backend.apirest.models.Region;
 
 public interface IClienteservice {
@@ -25,5 +26,11 @@ public interface IClienteservice {
     public void saveFile(MultipartFile file, Long id) throws IOException;
 
     public List<Region> findAllRegiones();
+
+    public Factura findFacturaById(Long id);
+
+    public Factura saveFactura(Factura factura);
+
+    public void deleteFacturaById(Long id);
 
 }
