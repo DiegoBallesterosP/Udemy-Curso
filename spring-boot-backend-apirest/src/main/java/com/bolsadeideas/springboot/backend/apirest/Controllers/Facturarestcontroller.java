@@ -27,6 +27,7 @@ public class Facturarestcontroller {
     @Autowired
     private IClienteservice clienteservice;
 
+    @Secured({ "ROLE_ADMIN", "ROLE_USER" })
     @GetMapping("/facturas/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public Factura show(@PathVariable Long id) {
@@ -34,12 +35,14 @@ public class Facturarestcontroller {
 
     }
 
+    @Secured({ "ROLE_ADMIN" })
     @DeleteMapping("/facturas/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         clienteservice.deleteFacturaById(id);
     }
 
+    @Secured({ "ROLE_ADMIN" })
     @GetMapping("/facturas/filtrar-productos/{term}")
     @ResponseStatus(HttpStatus.OK)
     public List<Producto> filtrarProductos(@PathVariable String term) {

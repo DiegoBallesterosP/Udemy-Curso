@@ -24,8 +24,7 @@ public class Resourceserverconfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/clientes", "/api/clientes/page/**", "/api/files/img/**",
                         "/images/**")
-                .permitAll().antMatchers("/api/clientes/{id}").permitAll().antMatchers("/api/facturas/** ").permitAll()
-                .anyRequest().authenticated().and().cors().configurationSource(corsConfigurationSource());
+                .permitAll().anyRequest().authenticated().and().cors().configurationSource(corsConfigurationSource());
     }
 
     @Bean
