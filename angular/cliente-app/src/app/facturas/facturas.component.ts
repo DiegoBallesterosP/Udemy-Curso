@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ClienteService } from '../clientes/cliente.service';
 import { Factura } from './models/factura';
@@ -9,6 +9,7 @@ import { FacturaService } from './services/factura.service';
 import { Producto } from './models/producto';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Itemfactura } from './models/itemfactura';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class FacturasComponent implements OnInit {
   productosFiltrados: Observable<Producto[]>;
 
 
-  constructor(private clienteService: ClienteService, private facturaService: FacturaService, private activatedRoute: ActivatedRoute) { }
+  constructor(private clienteService: ClienteService, private facturaService: FacturaService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -53,13 +54,13 @@ export class FacturasComponent implements OnInit {
     let producto = event.option.value as Producto;
     console.log();
 
-    if(this.existeItem(producto.id)){
+    if (this.existeItem(producto.id)) {
       this.incrementaCantidad(producto.id);
-   }else {
-    let nuevoItem = new Itemfactura();
-    nuevoItem.producto = producto;
-    this.factura.items.push(nuevoItem);
-   }  
+    } else {
+      let nuevoItem = new Itemfactura();
+      nuevoItem.producto = producto;
+      this.factura.items.push(nuevoItem);
+    }
 
     this.autocompleteControl.setValue('');
     event.option.focus();
@@ -70,7 +71,7 @@ export class FacturasComponent implements OnInit {
 
   actualizarCantidad(id: number, event: any): void {
     let cantidad: number = event.target.value as number;
-      if (cantidad == 0) {
+    if (cantidad == 0) {
       return this.eliminarItemFactura(id);
     }
     this.factura.items = this.factura.items.map((item: Itemfactura) => {
@@ -101,7 +102,17 @@ export class FacturasComponent implements OnInit {
     });
   }
 
-  eliminarItemFactura(id:number): void{
+  eliminarItemFactura(id: number): void {
     this.factura.items = this.factura.items.filter((item: Itemfactura) => id !== item.producto.id);
   }
-}
+
+
+  create(): void {
+    console.log(this.factura);
+      this.facturaService.create(this.factura).subscribe(factura => {
+        swal(this.titulo, `Factura ${factura.descripcion} creada con éxito!`, 'success');
+        this.router.navigate(['/clientes']);
+      });
+    }
+  }
+
