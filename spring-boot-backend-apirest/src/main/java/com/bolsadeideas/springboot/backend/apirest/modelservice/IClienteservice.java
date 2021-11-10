@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bolsadeideas.springboot.backend.apirest.models.Cliente;
 import com.bolsadeideas.springboot.backend.apirest.models.Factura;
+import com.bolsadeideas.springboot.backend.apirest.models.Producto;
 import com.bolsadeideas.springboot.backend.apirest.models.Region;
 
 public interface IClienteservice {
@@ -33,4 +34,5 @@ public interface IClienteservice {
 
     public void deleteFacturaById(Long id);
 
+    public List<Producto> findProductoByNombre(String term);
 }

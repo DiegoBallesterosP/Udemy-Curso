@@ -22,8 +22,11 @@ import { RoleGuard } from './usuarios/guards/role.guard';
 import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
 import { Detallefacturacomponent } from './facturas/detallefacturacomponent';
-
-
+import { FacturasComponent } from './facturas/facturas.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ReactiveFormsModule} from '@angular/forms';
 
 
 registerLocaleData(localeEs, 'es');
@@ -36,7 +39,8 @@ const routes: Routes = [
   { path: 'clientes/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
   { path: 'clientes/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
   { path: 'login', component: LoginComponent },
-  { path: 'facturas/:id', component: Detallefacturacomponent }
+  { path: 'facturas/:id', component: Detallefacturacomponent },
+  { path: 'facturas/form/:clienteId', component: FacturasComponent}
 ];
 
 @NgModule({
@@ -50,14 +54,19 @@ const routes: Routes = [
     PaginatorComponent,
     DetalleComponent,
     LoginComponent,
-    Detallefacturacomponent
+    Detallefacturacomponent,
+    FacturasComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [ClienteService, { provide: LOCALE_ID, useValue: 'es' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

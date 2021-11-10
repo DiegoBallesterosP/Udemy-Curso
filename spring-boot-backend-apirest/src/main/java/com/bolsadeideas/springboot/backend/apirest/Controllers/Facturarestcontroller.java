@@ -1,6 +1,9 @@
 package com.bolsadeideas.springboot.backend.apirest.Controllers;
 
+import java.util.List;
+
 import com.bolsadeideas.springboot.backend.apirest.models.Factura;
+import com.bolsadeideas.springboot.backend.apirest.models.Producto;
 import com.bolsadeideas.springboot.backend.apirest.modelservice.IClienteservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +37,10 @@ public class Facturarestcontroller {
         clienteservice.deleteFacturaById(id);
     }
 
+    @GetMapping("/facturas/filtrar-productos/{term}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Producto> filtrarProductos(@PathVariable String term) {
+        return clienteservice.findProductoByNombre(term);
+
+    }
 }

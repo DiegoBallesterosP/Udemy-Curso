@@ -9,9 +9,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import com.bolsadeideas.springboot.backend.apirest.models.Cliente;
 import com.bolsadeideas.springboot.backend.apirest.models.Factura;
+import com.bolsadeideas.springboot.backend.apirest.models.Producto;
 import com.bolsadeideas.springboot.backend.apirest.models.Region;
 import com.bolsadeideas.springboot.backend.apirest.modelsdao.IClientedao;
 import com.bolsadeideas.springboot.backend.apirest.modelsdao.IFacturadao;
+import com.bolsadeideas.springboot.backend.apirest.modelsdao.IProductodao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,9 @@ public class Clienteservicelmpl implements IClienteservice {
 
     @Autowired
     private IFacturadao facturaDao;
+
+    @Autowired
+    private IProductodao productoDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -96,6 +101,12 @@ public class Clienteservicelmpl implements IClienteservice {
     public void deleteFacturaById(Long id) {
         facturaDao.deleteById(id);
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> findProductoByNombre(String term) {
+        return productoDao.findByNombreContainingIgnoreCase(term);
     }
 
 }
