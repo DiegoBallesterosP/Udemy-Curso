@@ -81,7 +81,7 @@ export class DetalleComponent implements OnInit {
       if (result.value) {
         this.facturaService.delete(factura.id).subscribe(
           () => {
-            this.cliente.factura = this.cliente.factura.filter(f => f !== factura)
+            this.cliente.facturas = this.cliente.facturas.filter(f => f !== factura)
             swal(
               'Factura Eliminada!',
               `Factura ${factura.descripcion} eliminada con éxito.`,

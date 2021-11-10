@@ -10,5 +10,5 @@ export class Cliente {
     email: string;
     foto: string;
     region: Region;
-    factura: Factura[]=[];
+    facturas: Array<Factura> = [];
 } 
